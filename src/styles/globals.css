@@ -84,6 +84,9 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
 }
+html {
+  overflow: hidden;
+}
 
 body {
   color: rgb(var(--foreground-rgb));
@@ -104,4 +107,8 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+.Polaris-TopBar__SearchField {
+  margin-left: 0 !important;
 }
