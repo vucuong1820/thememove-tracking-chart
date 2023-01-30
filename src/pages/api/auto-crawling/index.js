@@ -1,6 +1,6 @@
-import agendaJob from '@helpers/agendaJob';
+import crawlThemes from '@helpers/crawlThemes';
 
 export default async function handler(req, res) {
-  await agendaJob();
+  await crawlThemes();
   res.json();
 }

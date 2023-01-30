@@ -27,6 +27,7 @@ const getPreviousData = async (dayStart, name) => {
 
 const crawlThemes = async () => {
   try {
+    console.log('AUTO CRAWL');
     const listTheme = [...themeShop, ...otherThemes];
     for (const theme of listTheme) {
       const { url, themeId, name, fixedSales, fixedReviews } = theme;
@@ -51,7 +52,6 @@ const crawlThemes = async () => {
       const dayEnd = zonedTimeToUtc(endOfDay(utcToZonedTime(currentDate, TIME_ZONE)), TIME_ZONE).toISOString();
 
       const previousData = await getPreviousData(dayStart, name);
-      console.log(name);
       await ThemeModel.findOneAndUpdate(
         {
           createdAt: {
