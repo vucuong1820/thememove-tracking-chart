@@ -29,8 +29,6 @@ function CompareChart({ showLineChart, themeList = themeMoveThemes }) {
       </TooltipContainer>
     );
   };
-  // console.log(datasets, rows);
-
   return (
     <Card>
       <Card.Header

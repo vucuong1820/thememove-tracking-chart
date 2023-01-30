@@ -6,6 +6,7 @@ const themeMoveThemes = [
     fixedSales: 2519,
     fixedReviews: 102,
     color: '#ED2B33FF',
+    category: ['eCommerce', 'WooCommerce'],
   },
   {
     url: 'https://themeforest.net/item/ecomm-the-powerful-woocommerce-theme',
@@ -14,6 +15,7 @@ const themeMoveThemes = [
     fixedSales: 195,
     fixedReviews: 10,
     color: '#4b92e5',
+    category: ['eCommerce', 'WooCommerce'],
   },
   {
     url: 'https://themeforest.net/item/makeaholic-beauty-cosmetics-wordpress-theme',
@@ -22,6 +24,7 @@ const themeMoveThemes = [
     fixedSales: 375,
     fixedReviews: 14,
     color: '#7f4afa',
+    category: ['eCommerce', 'WooCommerce'],
   },
   {
     url: 'https://themeforest.net/item/unicamp-university-and-college-wordpress-theme',
@@ -30,6 +33,7 @@ const themeMoveThemes = [
     fixedSales: 456,
     fixedReviews: 9,
     color: '#b176e2',
+    category: ['Education'],
   },
   {
     url: 'https://themeforest.net/item/edumall-lms-education-wordpress-theme',
@@ -38,6 +42,7 @@ const themeMoveThemes = [
     fixedSales: 2143,
     fixedReviews: 106,
     color: '#b1489e',
+    category: ['Education'],
   },
   {
     url: 'https://themeforest.net/item/medizin-medical-woocommerce-theme',
@@ -46,6 +51,7 @@ const themeMoveThemes = [
     fixedSales: 948,
     fixedReviews: 28,
     color: '#b66e3f',
+    category: ['Retail'],
   },
   {
     url: 'https://themeforest.net/item/maxcoach-online-courses-education-wp-theme',
@@ -53,6 +59,7 @@ const themeMoveThemes = [
     name: 'MaxCoach',
     fixedSales: 2838,
     fixedReviews: 95,
+    category: ['Education'],
   },
   {
     url: 'https://themeforest.net/item/billey-creative-multipurpose-wordpress-theme',
@@ -61,6 +68,7 @@ const themeMoveThemes = [
     fixedSales: 1283,
     fixedReviews: 40,
     color: '#4c9aaf',
+    category: ['Creative', 'Portfolio'],
   },
   {
     url: 'https://themeforest.net/item/smilepure-dental-medical-care-wordpress-theme',
@@ -69,6 +77,7 @@ const themeMoveThemes = [
     fixedSales: 229,
     fixedReviews: 11,
     color: '#4282cd',
+    category: ['Retail', 'Health & Beauty'],
   },
   {
     url: 'https://themeforest.net/item/retrolie-vintage-retro-multipurpose-wordpress-theme',
@@ -77,6 +86,7 @@ const themeMoveThemes = [
     fixedSales: 286,
     fixedReviews: 11,
     color: '#997afc',
+    category: ['Creative'],
   },
   {
     url: 'https://themeforest.net/item/it-solutions-mitech-technology-it-services-solutions-wordpress-theme',
@@ -85,6 +95,7 @@ const themeMoveThemes = [
     fixedSales: 2179,
     fixedReviews: 69,
     color: '#9f41dc',
+    category: ['Technology'],
   },
   {
     url: 'https://themeforest.net/item/learts-woocommerce-handmade-shop-wordpress-theme',
@@ -93,6 +104,7 @@ const themeMoveThemes = [
     fixedSales: 1260,
     fixedReviews: 47,
     color: '#da62c4',
+    category: ['eCommerce', 'WooCommerce'],
   },
   {
     url: 'https://themeforest.net/item/aeroland-responsive-app-landing-and-website-wordpress-theme',
@@ -101,6 +113,7 @@ const themeMoveThemes = [
     fixedSales: 506,
     fixedReviews: 18,
     color: '#7a4621',
+    category: ['Technology', ' Software'],
   },
   {
     url: 'https://themeforest.net/item/openlane-a-gutenberg-wordpress-theme-for-business',
@@ -109,6 +122,7 @@ const themeMoveThemes = [
     fixedSales: 134,
     fixedReviews: 10,
     color: '#97933e',
+    category: ['Corporate'],
   },
   {
     url: 'https://themeforest.net/item/healsoul-medical-and-healthcare-service-wordpress-theme',
@@ -117,6 +131,7 @@ const themeMoveThemes = [
     fixedSales: 1088,
     fixedReviews: 45,
     color: '#33798c',
+    category: ['Retail', 'Health & Beauty'],
   },
   {
     url: 'https://themeforest.net/item/brook-creative-multipurpose-wordpress-theme',
@@ -125,6 +140,7 @@ const themeMoveThemes = [
     fixedSales: 2193,
     fixedReviews: 74,
     color: '#4b92e5',
+    category: ['Creative', 'Portfolio'],
   },
   {
     url: 'https://themeforest.net/item/tractor-industrial-manufacturing-wordpress-theme',
@@ -133,6 +149,7 @@ const themeMoveThemes = [
     fixedSales: 630,
     fixedReviews: 32,
     color: '#7f4afa',
+    category: ['Corporate', 'Business'],
   },
   {
     url: 'https://themeforest.net/item/businext-supreme-businesses-and-financial-institutions-wordpress-theme',
@@ -141,6 +158,7 @@ const themeMoveThemes = [
     fixedSales: 776,
     fixedReviews: 38,
     color: '#b176e2',
+    category: ['Corporate', 'Business'],
   },
   {
     url: 'https://themeforest.net/item/lezada-minimal-creative-woocommerce-wordpress-theme',
@@ -149,6 +167,7 @@ const themeMoveThemes = [
     fixedSales: 703,
     fixedReviews: 39,
     color: '#b1489e',
+    category: ['eCommerce', 'WooCommerce'],
   },
   {
     url: 'https://themeforest.net/item/atomlab-multipurpose-startup-wordpress-theme',
@@ -157,6 +176,7 @@ const themeMoveThemes = [
     fixedSales: 1152,
     fixedReviews: 52,
     color: '#b66e3f',
+    category: ['Technology', 'Software'],
   },
   {
     url: 'https://themeforest.net/item/amely-ecommerce-wordpress-theme-for-woocommerce',
@@ -165,6 +185,7 @@ const themeMoveThemes = [
     fixedSales: 1721,
     fixedReviews: 86,
     color: '#bdb24e',
+    category: ['eCommerce', 'WooCommerce'],
   },
   {
     url: 'https://themeforest.net/item/conebrick-a-masterly-wordpress-theme-for-construction',
@@ -173,6 +194,7 @@ const themeMoveThemes = [
     fixedSales: 200,
     fixedReviews: 9,
     color: '#4c9aaf',
+    category: ['Corporate', 'Business'],
   },
   {
     url: 'https://themeforest.net/item/moody-a-modern-flexible-multipurpose-wordpress-theme',
@@ -181,6 +203,7 @@ const themeMoveThemes = [
     fixedSales: 733,
     fixedReviews: 33,
     color: '#4282cd',
+    category: ['Creative', 'Portfolio'],
   },
   {
     url: 'https://themeforest.net/item/wilson-multipurpose-wordpress-theme',
@@ -189,6 +212,7 @@ const themeMoveThemes = [
     fixedSales: 342,
     fixedReviews: 28,
     color: '#4282cd',
+    category: ['Creative', 'Portfolio'],
   },
   {
     url: 'https://themeforest.net/item/robin-a-furniture-woocommerce-wordpress-theme',
@@ -197,6 +221,7 @@ const themeMoveThemes = [
     fixedSales: 544,
     fixedReviews: 32,
     color: '#9f41dc',
+    category: ['eCommerce', 'WooCommerce'],
   },
   {
     url: 'https://themeforest.net/item/arden-a-sharp-modern-multipurpose-wordpress-theme',
@@ -205,6 +230,7 @@ const themeMoveThemes = [
     fixedSales: 778,
     fixedReviews: 50,
     color: '#da62c4',
+    category: ['Creative', 'Portfolio'],
   },
   {
     url: 'https://themeforest.net/item/trio-a-super-mature-multipurpose-wordpress-theme',
@@ -213,6 +239,7 @@ const themeMoveThemes = [
     fixedSales: 123,
     fixedReviews: 14,
     color: '#7a4621',
+    category: ['Creative'],
   },
   {
     url: 'https://themeforest.net/item/nine-studio-a-film-maker-studio-agency-blogger-wordpress-theme',
@@ -221,6 +248,7 @@ const themeMoveThemes = [
     fixedSales: 708,
     fixedReviews: 35,
     color: '#97933e',
+    category: ['Entertainment', 'Film & TV'],
   },
   {
     url: 'https://themeforest.net/item/organie-an-organic-store-farm-cake-flower-shop-woocommerce-theme',
@@ -229,6 +257,7 @@ const themeMoveThemes = [
     fixedSales: 985,
     fixedReviews: 53,
     color: '#33798c',
+    category: ['eCommerce', 'WooCommerce'],
   },
   {
     url: 'https://themeforest.net/item/organik-an-appealing-organic-store-farm-bakery-woocomerce-theme',
@@ -237,6 +266,7 @@ const themeMoveThemes = [
     fixedSales: 1898,
     fixedReviews: 114,
     color: '#4b92e5',
+    category: ['eCommerce', 'WooCommerce'],
   },
   {
     url: 'https://themeforest.net/item/buildplus-construction-wordpress-theme',
@@ -245,6 +275,7 @@ const themeMoveThemes = [
     fixedSales: 245,
     fixedReviews: 22,
     color: '#7f4afa',
+    category: ['Corporate', 'Business'],
   },
   {
     url: 'https://themeforest.net/item/molly-multipurpose-woocommerce-wordpress-theme',
@@ -253,6 +284,7 @@ const themeMoveThemes = [
     fixedSales: 320,
     fixedReviews: 30,
     color: '#b176e2',
+    category: ['eCommerce', 'WooCommerce'],
   },
   {
     url: 'https://themeforest.net/item/dione-enterprise-multipurpose-wordpress-theme',
@@ -261,6 +293,7 @@ const themeMoveThemes = [
     fixedSales: 480,
     fixedReviews: 26,
     color: '#b1489e',
+    category: ['Creative', 'Portfolio'],
   },
   {
     url: 'https://themeforest.net/item/heli-creative-multipurpose-wordpress-theme',
@@ -269,6 +302,7 @@ const themeMoveThemes = [
     fixedSales: 2267,
     fixedReviews: 162,
     color: '#b66e3f',
+    category: ['Creative', 'Portfolio'],
   },
   {
     url: 'https://themeforest.net/item/financeplus-finance-business-wordpress-theme',
@@ -277,6 +311,7 @@ const themeMoveThemes = [
     fixedSales: 1169,
     fixedReviews: 88,
     color: '#bdb24e',
+    category: ['Corporate', 'Business'],
   },
   {
     url: 'https://themeforest.net/item/lawyer-attorneys-a-law-office-wordpress-theme',
@@ -285,6 +320,7 @@ const themeMoveThemes = [
     fixedSales: 579,
     fixedReviews: 29,
     color: '#4c9aaf',
+    category: ['Corporate', 'Business'],
   },
   {
     url: 'https://themeforest.net/item/polygon-a-powerful-multipurpose-wp-theme',
@@ -293,6 +329,7 @@ const themeMoveThemes = [
     fixedSales: 1365,
     fixedReviews: 66,
     color: '#4282cd',
+    category: ['Corporate', 'Business'],
   },
   {
     url: 'https://themeforest.net/item/hair-salon-a-barber-wordpress-theme',
@@ -301,6 +338,7 @@ const themeMoveThemes = [
     fixedSales: 427,
     fixedReviews: 21,
     color: '#997afc',
+    category: ['Retail', 'Health & Beauty'],
   },
   {
     url: 'https://themeforest.net/item/renovation-home-maintenance-repair-service-theme',
@@ -309,6 +347,7 @@ const themeMoveThemes = [
     fixedSales: 2098,
     fixedReviews: 108,
     color: '#9f41dc',
+    category: ['Corporate', 'Business'],
   },
   {
     url: 'https://themeforest.net/item/zebre-minimal-agency-porfolio-wp-theme',
@@ -317,6 +356,7 @@ const themeMoveThemes = [
     fixedSales: 416,
     fixedReviews: 23,
     color: '#da62c4',
+    category: ['Creative', 'Portfolio'],
   },
   {
     url: 'https://themeforest.net/item/woodworker-carpentry-wordpress-theme',
@@ -325,6 +365,7 @@ const themeMoveThemes = [
     fixedSales: 829,
     fixedReviews: 43,
     color: '#7a4621',
+    category: ['Corporate', 'Business'],
   },
   {
     url: 'https://themeforest.net/item/lily-an-elegant-wordpress-blog-theme',
@@ -333,6 +374,7 @@ const themeMoveThemes = [
     fixedSales: 725,
     fixedReviews: 56,
     color: '#97933e',
+    category: ['Blog', 'Magazine', 'Personal'],
   },
   {
     url: 'https://themeforest.net/item/transport-transport-logistic-warehouse-wp-',
@@ -341,6 +383,7 @@ const themeMoveThemes = [
     fixedSales: 1596,
     fixedReviews: 101,
     color: '#33798c',
+    category: ['Corporate', 'Business'],
   },
   {
     url: 'https://themeforest.net/item/structure-construction-wordpress-theme',
@@ -349,6 +392,7 @@ const themeMoveThemes = [
     fixedSales: 3982,
     fixedReviews: 261,
     color: '#4b92e5',
+    category: ['Corporate', 'Business'],
   },
 ];
 

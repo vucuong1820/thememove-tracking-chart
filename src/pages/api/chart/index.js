@@ -26,7 +26,6 @@ export default async function handler(req, res) {
       const theme = themeShop.find((theme) => theme.themeId === Number(themeId));
       if (theme) {
         const { themeId, url } = theme;
-        console.log('count');
 
         const crawlRes = await axios.get(`${url}/reviews/${themeId}`);
 

@@ -32,7 +32,6 @@ export default function useCompareChart({ themeList }) {
     const groups = await getCompareChartDataService(selectedDate, themeList);
     let newDatasets = [];
     let newRows = [];
-    console.log(groups);
     for (const themeName in groups) {
       const { items } = groups[themeName];
       const themeDetail = themeList.find((x) => x.name === themeName);
@@ -89,7 +88,7 @@ export default function useCompareChart({ themeList }) {
   };
 
   return {
-    // handleChange: () => {},
+    handleChange,
     handleChangeDate,
     selectedDate,
     loading,
