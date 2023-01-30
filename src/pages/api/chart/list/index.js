@@ -45,6 +45,8 @@ export default async function handler(req, res) {
     }, {});
     res.status(200).json(groups);
   } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(error);
     res.status(error.response.status).send(error.response.data);
   }
 }
