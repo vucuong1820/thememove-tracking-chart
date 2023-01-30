@@ -25,8 +25,6 @@ const getPreviousData = async (dayStart, name) => {
 };
 
 export default async function handler(req, res) {
-  // eslint-disable-next-line no-console
-  console.log('MANUAL CRAWLING');
   const { themeId } = req.query;
   const themeList = [...themeMoveThemes, ...otherThemes];
   const theme = themeList.find((x) => x.themeId === Number.parseInt(themeId));
