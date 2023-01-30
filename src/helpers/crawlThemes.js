@@ -71,6 +71,7 @@ const crawlThemes = async () => {
         { upsert: true },
       );
     }
+    console.log('FINISH CRAWL');
   } catch (error) {
     console.log(error);
   }
