@@ -8,7 +8,7 @@ async function connectMongo() {
     return;
   }
   // eslint-disable-next-line no-console
-  console.log('ENV:', process.env.MONGO_URI)
+  console.log('ENV:', process.env.MONGO_URI);
   const db = await mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
