@@ -34,7 +34,7 @@ export default async function handler(req, res) {
       }
     }
 
-    const response = await Theme.find(filters);
+    const response = await Theme.find(filters).sort({ createdAt: 1 });
 
     res.status(200).json({
       items: response,
