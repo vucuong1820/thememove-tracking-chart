@@ -27,9 +27,9 @@ const getPreviousData = async (dayStart, name) => {
 
 const crawlThemes = async () => {
   try {
-    console.log('AUTO CRAWL');
+    console.log('[AUTO CRAWL]');
     const listTheme = [...themeShop, ...otherThemes];
-    for (const theme of listTheme) {
+    listTheme.forEach(async (theme) => {
       const { url, themeId, name, fixedSales, fixedReviews } = theme;
       // const themeData = await getThemeData(themeId);
 
@@ -70,8 +70,9 @@ const crawlThemes = async () => {
         },
         { upsert: true },
       );
-    }
-    console.log('FINISH CRAWL');
+      console.log('[CRAWL:]', name);
+    });
+    console.log('[FINISH CRAWL]');
   } catch (error) {
     console.log(error);
   }
