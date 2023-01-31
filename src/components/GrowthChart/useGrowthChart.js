@@ -10,7 +10,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 const minimog = themeShop.find((theme) => theme.themeId === MINIMOG_THEME_ID);
 export const FIXED_REVIEW_VALUE = 1;
 
-export default function useGrowthChart({ mode, themeList }) {
+export default function useGrowthChart({ mode }) {
   const [total, setTotal] = useState(0);
   const [growthRate, setGrowthRate] = useState();
   const [rating, setRating] = useState(5.0);

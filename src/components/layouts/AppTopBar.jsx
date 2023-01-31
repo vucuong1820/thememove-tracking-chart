@@ -1,4 +1,5 @@
-import { Link, TopBar } from '@shopify/polaris';
+import { TopBar } from '@shopify/polaris';
+import Link from 'next/link';
 import AppLogo from 'public/logo.png';
 import styled from 'styled-components';
 const TopBarWrapper = styled.div`
@@ -28,7 +29,7 @@ export function AppTopBar() {
   const searchFieldMarkup = (
     <>
       <div className="Polaris-TopBar__LogoContainer Polaris-TopBar__LogoDisplayControl">
-        <Link url="/dashboard">
+        <Link href="/">
           <img className="app-logo" src={AppLogo?.src} />
           ThemeMove Tracking Chart
         </Link>

@@ -9,7 +9,6 @@ export default function useTotalGrowthChart({ themeList, mode }) {
   const [selectedDate, setSelectedDate] = useState(getDateRange('this_week'));
   const [datasets, setDatasets] = useState([]);
   const [selectedDatasets, setSelectedDatasets] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   const getTotalSalesOrReviewsAllTime = (item) => {
     return mode === CHART_GROWTH_MAPPING.REVIEWS.key ? item?.totalReviews ?? 0 : item?.totalSales ?? 0;
@@ -86,7 +85,5 @@ export default function useTotalGrowthChart({ themeList, mode }) {
       // });
     }
   };
-
-  //   console.log(datasets);
   return { setSelectedDate, selectedDate, handleConfirm, datasets, handleSelectLegend, selectedDatasets };
 }

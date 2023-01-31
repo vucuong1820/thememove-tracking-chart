@@ -2,10 +2,9 @@
 import connectMongo from '@configs/connectMongo';
 import { TIME_ZONE } from '@constants';
 import themeMoveThemes, { otherThemes } from '@constants/themes';
-import crawlThemes from '@helpers/crawlThemes';
 import ThemeModel from '@models/Theme';
 import axios from 'axios';
-import cheerio from 'cheerio';
+import { load } from 'cheerio';
 import { endOfDay, startOfDay } from 'date-fns';
 import { utcToZonedTime, zonedTimeToUtc } from 'date-fns-tz';
 
@@ -33,7 +32,7 @@ export default async function handler(req, res) {
 
     const crawlRes = await axios.get(`${url}/reviews/${themeId}`);
 
-    const $ = cheerio.load(crawlRes.data);
+    const $ = load(crawlRes.data);
 
     const rating = Number(
       parseFloat(
@@ -71,7 +70,6 @@ export default async function handler(req, res) {
     );
     res.json();
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log(error);
+    res.status(error.response.status).send(error.response.data);
   }
 }

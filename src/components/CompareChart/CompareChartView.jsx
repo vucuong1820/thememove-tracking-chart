@@ -1,11 +1,10 @@
 import { TooltipContainer } from '@components/chart.styles';
 import DateSelector from '@components/DateSelector';
 import PolarisLineChart from '@components/layouts/PolarisLineChart';
-import Table from '@components/layouts/Table';
 import LegendItem from '@components/LegendItem';
 import TooltipItem from '@components/TooltipItem';
 import themeMoveThemes from '@constants/themes';
-import { Button, Card, FormLayout, Heading, Stack } from '@shopify/polaris';
+import { Card, FormLayout, Heading, Stack } from '@shopify/polaris';
 import { cloneDeep } from 'lodash';
 import CompareTable from './CompareTable';
 import useCompareChart from './useCompareChart';
@@ -43,9 +42,9 @@ function CompareChart({ showLineChart, themeList = themeMoveThemes }) {
           </Stack>
         }
       >
-        <Button onClick={handleClick} plain>
+        {/* <Button onClick={handleClick} plain>
           Post to Slack
-        </Button>
+        </Button> */}
       </Card.Header>
       <CompareTable rows={rows} loading={loading} />
       {showLineChart && (

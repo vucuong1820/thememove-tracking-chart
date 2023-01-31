@@ -1,7 +1,7 @@
 import { AppFrame } from '@components/layouts/AppFrame';
 import themeMoveThemes, { otherThemes } from '@constants/themes';
 import manualCrawlService from '@services/manualCrawlService';
-import { AppProvider, Spinner } from '@shopify/polaris';
+import { AppProvider } from '@shopify/polaris';
 import '@shopify/polaris-viz/build/esm/styles.css';
 import '@shopify/polaris/build/esm/styles.css';
 import en from '@shopify/polaris/locales/en.json';

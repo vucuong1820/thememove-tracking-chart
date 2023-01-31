@@ -1,10 +1,13 @@
 /* eslint-disable no-useless-escape */
+import connectMongo from '@configs/connectMongo';
+import { TIME_ZONE } from '@constants';
 import themeMoveThemes from '@constants/themes';
-import themeShop from '@constants/themes';
 import Theme from '@models/Theme';
+import { endOfDay, startOfDay } from 'date-fns';
+import { utcToZonedTime, zonedTimeToUtc } from 'date-fns-tz';
 import { cloneDeep, groupBy } from 'lodash';
 
-// dbConnect();
+connectMongo();
 
 export default async function handler(req, res) {
   try {
@@ -23,30 +26,39 @@ export default async function handler(req, res) {
 
     const response = await Theme.find(filters);
 
+    const currentDate = new Date();
+    const dayStart = zonedTimeToUtc(startOfDay(utcToZonedTime(currentDate, TIME_ZONE)), TIME_ZONE).toISOString();
+    const dayEnd = zonedTimeToUtc(endOfDay(utcToZonedTime(currentDate, TIME_ZONE)), TIME_ZONE).toISOString();
+
+    const currentTotalSalesList = await Theme.find({
+      createdAt: {
+        $gte: dayStart,
+        $lte: dayEnd,
+      },
+      name: {
+        $in: themes.map((theme) => theme.name),
+      },
+    }).select('totalSales themeId');
+
     const responseGroupByName = groupBy(cloneDeep(response), 'name');
 
-    const groups = Object.keys(responseGroupByName).reduce((res, themeName) => {
+    let groups = {};
+    for (const themeName of Object.keys(responseGroupByName)) {
       let totalSales;
       const theme = themes.find((theme) => theme.name === themeName);
-      //   if (theme) {
-      //     const { themeId, url } = theme;
+      if (theme) {
+        const { themeId } = theme;
 
-      //     axios.get(`${url}/reviews/${themeId}`).then((res) => {
-      //       const $ = cheerio.load(res.data);
-      //       console.log(Number($('.item-header__sales-count').text().replace(/\D/g, '')));
-      //       totalSales = Number($('.item-header__sales-count').text().replace(/\D/g, ''));
-      //     });
-      //   }
-      res[themeName] = {
+        totalSales = currentTotalSalesList?.find((x) => x?.themeId === themeId)?.totalSales;
+      }
+      groups[themeName] = {
         items: responseGroupByName[themeName],
         totalSales,
       };
-      return res;
-    }, {});
+    }
+
     res.status(200).json(groups);
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log(error);
     res.status(error.response.status).send(error.response.data);
   }
 }

@@ -1,9 +1,7 @@
 /* eslint-disable no-console */
 
-import themeShop from '@constants/themes';
 import getDateRange from '@helpers/getDateRange';
 import getCompareChartDataService from '@services/getCompareChartDataService';
-import getThemeDataService from '@services/getThemeDataService';
 import { TextStyle } from '@shopify/polaris';
 import { format } from 'date-fns';
 import { cloneDeep } from 'lodash';
@@ -15,7 +13,6 @@ export default function useCompareChart({ themeList }) {
   const [loading, setLoading] = useState(false);
   const [selectedDate, setSelectedDate] = useState(getDateRange('this_week'));
   const [selectedDatasets, setSelectedDatasets] = useState([]);
-  //   const { showToast } = useNotificationStore();
   const handleChangeDate = (newSelectedDate) => {
     if (newSelectedDate) setSelectedDate(newSelectedDate);
   };
@@ -33,7 +30,7 @@ export default function useCompareChart({ themeList }) {
     let newDatasets = [];
     let newRows = [];
     for (const themeName in groups) {
-      const { items } = groups[themeName];
+      const { items, totalSales } = groups[themeName];
       const themeDetail = themeList.find((x) => x.name === themeName);
       const data = items.map((themeItem) => ({ key: format(new Date(themeItem?.createdAt), 'MM/dd/yyyy'), value: themeItem?.salesPerDay }));
       newDatasets.push({
@@ -41,23 +38,21 @@ export default function useCompareChart({ themeList }) {
         data,
         color: themeDetail?.color,
       });
-      newRows.push(formatThemeRow({ items, detail: themeDetail }));
+      newRows.push(formatThemeRow({ items, detail: themeDetail, totalSales }));
     }
     setDatasets(newDatasets);
 
     setRows(newRows);
   };
 
-  const formatThemeRow = ({ items, detail }) => {
+  const formatThemeRow = ({ items, detail, totalSales }) => {
     let sales = 0;
     let rating = 5;
     let reviews = 0;
-    let totalSales = 0;
     for (const item of items) {
       sales += item?.salesPerDay;
       rating = item?.rating;
       reviews += item?.reviewsPerDay;
-      totalSales = item?.totalSales;
     }
 
     return [

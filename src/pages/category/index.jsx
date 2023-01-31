@@ -1,4 +1,3 @@
-import GrowthChart from '@components/GrowthChart';
 import TotalGrowthChart from '@components/TotalGrowthChart';
 import { CHART_GROWTH_MAPPING } from '@constants/chart';
 import themeMoveThemes from '@constants/themes';
