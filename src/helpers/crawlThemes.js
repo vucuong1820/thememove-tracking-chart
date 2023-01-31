@@ -29,10 +29,8 @@ const crawlThemes = async () => {
   try {
     console.log('[AUTO CRAWL]');
     const listTheme = [...themeShop, ...otherThemes];
-    listTheme.forEach(async (theme) => {
+    for (const theme of listTheme) {
       const { url, themeId, name, fixedSales, fixedReviews } = theme;
-      // const themeData = await getThemeData(themeId);
-
       const crawlRes = await axios.get(`${url}/reviews/${themeId}`);
 
       const $ = load(crawlRes.data);
@@ -71,7 +69,7 @@ const crawlThemes = async () => {
         { upsert: true },
       );
       console.log('[CRAWL:]', name);
-    });
+    }
     console.log('[FINISH CRAWL]');
   } catch (error) {
     console.log(error);
