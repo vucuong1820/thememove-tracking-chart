@@ -26,6 +26,7 @@ export default function useCompareChart({ themeList }) {
   }, [themeList]);
 
   const handleChange = async () => {
+    setSelectedDatasets([]);
     const groups = await getCompareChartDataService(selectedDate, themeList);
     let newDatasets = [];
     let newRows = [];

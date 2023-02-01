@@ -403,6 +403,7 @@ export const otherThemes = [
     name: 'Construction Wordpress Theme',
     fixedSales: 10005,
     fixedReviews: 322,
+    color: '#4c9aaf',
   },
   {
     url: 'https://themeforest.net/item/constructo-wp-construction-business-theme',
@@ -410,6 +411,7 @@ export const otherThemes = [
     name: 'Constructo',
     fixedSales: 6607,
     fixedReviews: 232,
+    color: '#4b92e5',
   },
   {
     url: 'https://themeforest.net/item/renovate-construction-renovation-wordpress-theme',
@@ -417,6 +419,7 @@ export const otherThemes = [
     name: 'Renovate',
     fixedSales: 5347,
     fixedReviews: 230,
+    color: '#997afc',
   },
   {
     url: 'https://themeforest.net/item/construction-construction-building-company',
@@ -424,6 +427,7 @@ export const otherThemes = [
     name: 'Construction',
     fixedSales: 4424,
     fixedReviews: 146,
+    color: '#b176e2',
   },
   {
     url: 'https://themeforest.net/item/wilmr-construction-wordpress-theme',
@@ -431,6 +435,7 @@ export const otherThemes = [
     name: 'Wilmër',
     fixedSales: 3131,
     fixedReviews: 51,
+    color: '#da62c4',
   },
   {
     url: 'https://themeforest.net/item/efor-coaching-online-courses-wordpress-theme',
@@ -438,6 +443,7 @@ export const otherThemes = [
     name: 'Efor',
     fixedSales: 4084,
     fixedReviews: 71,
+    color: '#4b92e5',
   },
   {
     url: 'https://themeforest.net/item/dotlife-coach-speaker-wordpress',
@@ -445,6 +451,7 @@ export const otherThemes = [
     name: 'DotLife',
     fixedSales: 3365,
     fixedReviews: 75,
+    color: '#997afc',
   },
   {
     url: 'https://themeforest.net/item/ed-school-elementary-middle-and-highschool-wordpress-theme',
@@ -452,6 +459,7 @@ export const otherThemes = [
     name: 'Ed School',
     fixedSales: 3320,
     fixedReviews: 75,
+    color: '#b176e2',
   },
   {
     url: 'https://themeforest.net/item/eikra-education-wordpress-theme',
@@ -459,6 +467,7 @@ export const otherThemes = [
     name: 'Eikra',
     fixedSales: 2600,
     fixedReviews: 87,
+    color: '#da62c4',
   },
   {
     url: 'https://themeforest.net/item/skilled-school-education-courses-wordpress-theme',
@@ -466,6 +475,7 @@ export const otherThemes = [
     name: 'Skilled',
     fixedSales: 2446,
     fixedReviews: 68,
+    color: '#ca7d4a',
   },
   {
     url: 'https://themeforest.net/item/woodmart-woocommerce-wordpress-theme',
@@ -473,6 +483,7 @@ export const otherThemes = [
     name: 'WoodMart',
     fixedSales: 53929,
     fixedReviews: 2162,
+    color: '#4c9aaf',
   },
   {
     url: 'https://themeforest.net/item/porto-responsive-wordpress-ecommerce-theme',
@@ -480,6 +491,7 @@ export const otherThemes = [
     name: 'Porto',
     fixedSales: 79748,
     fixedReviews: 3538,
+    color: '#4b92e5',
   },
   {
     url: 'https://themeforest.net/item/pressmart-modern-elementor-woocommerce-wordpress-theme',
@@ -487,6 +499,7 @@ export const otherThemes = [
     name: 'PressMart',
     fixedSales: 996,
     fixedReviews: 41,
+    color: '#997afc',
   },
   {
     url: 'https://themeforest.net/item/ciyashop-responsive-multipurpose-woocommerce-wordpress-theme',
@@ -494,6 +507,7 @@ export const otherThemes = [
     name: 'CiyaShop',
     fixedSales: 2966,
     fixedReviews: 206,
+    color: '#b176e2',
   },
   {
     url: 'https://themeforest.net/item/kapee-fashion-store-woocommerce-theme',
@@ -501,6 +515,7 @@ export const otherThemes = [
     name: 'Kapee',
     fixedSales: 3368,
     fixedReviews: 172,
+    color: '#da62c4',
   },
   {
     url: 'https://themeforest.net/item/pond-creative-portfolio-agency-wordpress-theme',
@@ -508,6 +523,7 @@ export const otherThemes = [
     name: 'Pond',
     fixedSales: 2175,
     fixedReviews: 91,
+    color: '#4c9aaf',
   },
   {
     url: 'https://themeforest.net/item/avoc-unique-and-minimal-portfolio-agency-wordpress-theme',
@@ -515,6 +531,7 @@ export const otherThemes = [
     name: 'Avoc',
     fixedSales: 2170,
     fixedReviews: 67,
+    color: '#4b92e5',
   },
   {
     url: 'https://themeforest.net/item/air-lightweight-portfolio-photography-wp-theme',
@@ -522,6 +539,7 @@ export const otherThemes = [
     name: 'Air',
     fixedSales: 2126,
     fixedReviews: 55,
+    color: '#997afc',
   },
   {
     url: 'https://themeforest.net/item/grand-portfolio-responsive-portfolio',
@@ -529,6 +547,7 @@ export const otherThemes = [
     name: 'Grand Portfolio',
     fixedSales: 2323,
     fixedReviews: 104,
+    color: '#b176e2',
   },
   {
     url: 'https://themeforest.net/item/proton-minimal-portfolio-theme',
@@ -536,6 +555,7 @@ export const otherThemes = [
     name: 'Proton',
     fixedSales: 1980,
     fixedReviews: 158,
+    color: '#da62c4',
   },
   {
     url: 'https://themeforest.net/item/ohio-creative-wordpress-theme',
@@ -543,6 +563,7 @@ export const otherThemes = [
     name: 'Ohio',
     fixedSales: 13761,
     fixedReviews: 392,
+    color: '#4c9aaf',
   },
   {
     url: 'https://themeforest.net/item/lekker-portfolio-wordpress-theme',
@@ -550,6 +571,7 @@ export const otherThemes = [
     name: 'Lekker',
     fixedSales: 2365,
     fixedReviews: 37,
+    color: '#4b92e5',
   },
   {
     url: 'https://themeforest.net/item/shiftcv-blog-resume-portfolio-wordpress',
@@ -557,6 +579,7 @@ export const otherThemes = [
     name: 'ShiftCV',
     fixedSales: 2192,
     fixedReviews: 204,
+    color: '#997afc',
   },
   {
     url: 'https://themeforest.net/item/folie-the-wordpress-website-builder',
@@ -564,6 +587,7 @@ export const otherThemes = [
     name: 'Folie',
     fixedSales: 2188,
     fixedReviews: 48,
+    color: '#b176e2',
   },
   {
     url: 'https://themeforest.net/item/lobo-portfolio-for-freelancers-agencies',
@@ -571,6 +595,7 @@ export const otherThemes = [
     name: 'Lobo',
     fixedSales: 5120,
     fixedReviews: 319,
+    color: '#da62c4',
   },
 ];
 
@@ -591,6 +616,7 @@ export const compareThemes = {
       name: 'Construction Wordpress Theme',
       fixedSales: 10005,
       fixedReviews: 322,
+      color: '#4c9aaf',
     },
     {
       url: 'https://themeforest.net/item/constructo-wp-construction-business-theme',
@@ -598,6 +624,7 @@ export const compareThemes = {
       name: 'Constructo',
       fixedSales: 6607,
       fixedReviews: 232,
+      color: '#4b92e5',
     },
     {
       url: 'https://themeforest.net/item/renovate-construction-renovation-wordpress-theme',
@@ -605,6 +632,7 @@ export const compareThemes = {
       name: 'Renovate',
       fixedSales: 5347,
       fixedReviews: 230,
+      color: '#997afc',
     },
     {
       url: 'https://themeforest.net/item/construction-construction-building-company',
@@ -612,6 +640,7 @@ export const compareThemes = {
       name: 'Construction',
       fixedSales: 4424,
       fixedReviews: 146,
+      color: '#b176e2',
     },
     {
       url: 'https://themeforest.net/item/wilmr-construction-wordpress-theme',
@@ -619,6 +648,7 @@ export const compareThemes = {
       name: 'Wilmër',
       fixedSales: 3131,
       fixedReviews: 51,
+      color: '#da62c4',
     },
   ],
   MaxCoach: [
@@ -629,6 +659,7 @@ export const compareThemes = {
       priority: true,
       fixedSales: 2838,
       fixedReviews: 95,
+      color: '#4c9aaf',
     },
     {
       url: 'https://themeforest.net/item/efor-coaching-online-courses-wordpress-theme',
@@ -636,6 +667,7 @@ export const compareThemes = {
       name: 'Efor',
       fixedSales: 4084,
       fixedReviews: 71,
+      color: '#4b92e5',
     },
     {
       url: 'https://themeforest.net/item/dotlife-coach-speaker-wordpress',
@@ -643,6 +675,7 @@ export const compareThemes = {
       name: 'DotLife',
       fixedSales: 3365,
       fixedReviews: 75,
+      color: '#997afc',
     },
     {
       url: 'https://themeforest.net/item/ed-school-elementary-middle-and-highschool-wordpress-theme',
@@ -650,6 +683,7 @@ export const compareThemes = {
       name: 'Ed School',
       fixedSales: 3320,
       fixedReviews: 75,
+      color: '#b176e2',
     },
     {
       url: 'https://themeforest.net/item/eikra-education-wordpress-theme',
@@ -657,6 +691,7 @@ export const compareThemes = {
       name: 'Eikra',
       fixedSales: 2600,
       fixedReviews: 87,
+      color: '#da62c4',
     },
     {
       url: 'https://themeforest.net/item/skilled-school-education-courses-wordpress-theme',
@@ -664,6 +699,7 @@ export const compareThemes = {
       name: 'Skilled',
       fixedSales: 2446,
       fixedReviews: 68,
+      color: '#ca7d4a',
     },
   ],
   MinimogWP: [
@@ -689,6 +725,7 @@ export const compareThemes = {
       name: 'Porto',
       fixedSales: 79748,
       fixedReviews: 3538,
+      color: '#4b92e5',
     },
     {
       url: 'https://themeforest.net/item/pressmart-modern-elementor-woocommerce-wordpress-theme',
@@ -696,6 +733,7 @@ export const compareThemes = {
       name: 'PressMart',
       fixedSales: 996,
       fixedReviews: 41,
+      color: '#997afc',
     },
     {
       url: 'https://themeforest.net/item/ciyashop-responsive-multipurpose-woocommerce-wordpress-theme',
@@ -703,6 +741,7 @@ export const compareThemes = {
       name: 'CiyaShop',
       fixedSales: 2966,
       fixedReviews: 206,
+      color: '#b176e2',
     },
     {
       url: 'https://themeforest.net/item/kapee-fashion-store-woocommerce-theme',
@@ -710,6 +749,7 @@ export const compareThemes = {
       name: 'Kapee',
       fixedSales: 3368,
       fixedReviews: 172,
+      color: '#da62c4',
     },
   ],
   Heli: [
@@ -728,6 +768,7 @@ export const compareThemes = {
       name: 'Pond',
       fixedSales: 2175,
       fixedReviews: 91,
+      color: '#4c9aaf',
     },
     {
       url: 'https://themeforest.net/item/avoc-unique-and-minimal-portfolio-agency-wordpress-theme',
@@ -735,6 +776,7 @@ export const compareThemes = {
       name: 'Avoc',
       fixedSales: 2170,
       fixedReviews: 67,
+      color: '#4b92e5',
     },
     {
       url: 'https://themeforest.net/item/air-lightweight-portfolio-photography-wp-theme',
@@ -742,6 +784,7 @@ export const compareThemes = {
       name: 'Air',
       fixedSales: 2126,
       fixedReviews: 55,
+      color: '#997afc',
     },
     {
       url: 'https://themeforest.net/item/grand-portfolio-responsive-portfolio',
@@ -749,6 +792,7 @@ export const compareThemes = {
       name: 'Grand Portfolio',
       fixedSales: 2323,
       fixedReviews: 104,
+      color: '#b176e2',
     },
     {
       url: 'https://themeforest.net/item/proton-minimal-portfolio-theme',
@@ -756,6 +800,7 @@ export const compareThemes = {
       name: 'Proton',
       fixedSales: 1980,
       fixedReviews: 158,
+      color: '#da62c4',
     },
   ],
   Brook: [
@@ -774,6 +819,7 @@ export const compareThemes = {
       name: 'Ohio',
       fixedSales: 13761,
       fixedReviews: 392,
+      color: '#4c9aaf',
     },
     {
       url: 'https://themeforest.net/item/lekker-portfolio-wordpress-theme',
@@ -781,6 +827,7 @@ export const compareThemes = {
       name: 'Lekker',
       fixedSales: 2365,
       fixedReviews: 37,
+      color: '#4b92e5',
     },
     {
       url: 'https://themeforest.net/item/shiftcv-blog-resume-portfolio-wordpress',
@@ -788,6 +835,7 @@ export const compareThemes = {
       name: 'ShiftCV',
       fixedSales: 2192,
       fixedReviews: 204,
+      color: '#997afc',
     },
     {
       url: 'https://themeforest.net/item/folie-the-wordpress-website-builder',
@@ -795,6 +843,7 @@ export const compareThemes = {
       name: 'Folie',
       fixedSales: 2188,
       fixedReviews: 48,
+      color: '#b176e2',
     },
     {
       url: 'https://themeforest.net/item/lobo-portfolio-for-freelancers-agencies',
@@ -802,6 +851,7 @@ export const compareThemes = {
       name: 'Lobo',
       fixedSales: 5120,
       fixedReviews: 319,
+      color: '#da62c4',
     },
   ],
 };
