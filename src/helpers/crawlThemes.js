@@ -69,8 +69,6 @@ const crawlThemes = async (themes) => {
       );
       console.log('[CRAWL:]', name);
     }
-    const newCronJob = new CronJobModel({ status: 'SUCCESS' });
-    await newCronJob.save();
     console.log('[FINISH CRAWL]');
   } catch (error) {
     console.log(error);

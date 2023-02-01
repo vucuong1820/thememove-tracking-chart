@@ -10,6 +10,6 @@ export default async function handler(req, res) {
 
   const themes = themeList.slice(start * LIMIT, start * LIMIT + LIMIT);
 
-  crawlThemes(themes);
+  await crawlThemes(themes);
   res.status(200).send(`CRAWL SUCCESSFULLY: ${themes?.map((x) => x?.name)?.join(',')}`);
 }
