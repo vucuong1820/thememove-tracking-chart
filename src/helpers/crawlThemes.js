@@ -3,7 +3,6 @@
 
 import connectMongo from '@configs/connectMongo';
 import { TIME_ZONE } from '@constants';
-import themeShop, { otherThemes } from '@constants/themes';
 import ThemeModel from '@models/Theme';
 import axios from 'axios';
 import { load } from 'cheerio';
@@ -25,11 +24,10 @@ const getPreviousData = async (dayStart, name) => {
   return data;
 };
 
-const crawlThemes = async () => {
+const crawlThemes = async (themes) => {
   try {
     console.log('[AUTO CRAWL]');
-    const listTheme = [...themeShop, ...otherThemes];
-    for (const theme of listTheme) {
+    for (const theme of themes) {
       const { url, themeId, name, fixedSales, fixedReviews } = theme;
       const crawlRes = await axios.get(`${url}/reviews/${themeId}`);
 
