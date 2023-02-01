@@ -19,6 +19,7 @@
     "date-fns": "^2.29.2",
     "date-fns-tz": "^1.2.2",
     "dotenv": "^16.0.3",
+    "inngest": "^0.9.3",
     "lodash": "^4.17.21",
     "mongoose": "^6.1.7",
     "next": "^13.1.1",
