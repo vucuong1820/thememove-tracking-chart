@@ -56,7 +56,7 @@ const crawlThemes = async (themes) => {
             $lte: dayEnd,
           },
           themeId: themeId,
-          name: 'test',
+          name: name,
         },
         {
           totalSales,
