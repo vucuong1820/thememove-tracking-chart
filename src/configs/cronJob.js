@@ -1,6 +1,6 @@
 import { Inngest } from 'inngest';
 
-const inngest = new Inngest({ name: 'My app' });
+const inngest = new Inngest({ name: 'thememove-tracking-chart' });
 
 export default inngest.createScheduledFunction(
   'Weekly digest email', // The name of your function, used for observability.
