@@ -25,7 +25,7 @@ const getPreviousData = async (dayStart, name) => {
 
 export default async function handler(req, res) {
   try {
-    const { themeId } = req.query;
+    const { themeId } = req.body;
     const themeList = [...themeMoveThemes, ...otherThemes];
     const theme = themeList.find((x) => x.themeId === Number.parseInt(themeId));
     const { url, name, fixedSales, fixedReviews } = theme;
