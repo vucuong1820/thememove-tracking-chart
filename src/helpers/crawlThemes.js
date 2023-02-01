@@ -3,6 +3,7 @@
 
 import connectMongo from '@configs/connectMongo';
 import { TIME_ZONE } from '@constants';
+import CronJobModel from '@models/CronJob';
 import ThemeModel from '@models/Theme';
 import axios from 'axios';
 import { load } from 'cheerio';
@@ -55,7 +56,7 @@ const crawlThemes = async (themes) => {
             $lte: dayEnd,
           },
           themeId: themeId,
-          name: name,
+          name: 'test',
         },
         {
           totalSales,
@@ -68,6 +69,8 @@ const crawlThemes = async (themes) => {
       );
       console.log('[CRAWL:]', name);
     }
+    // const newCronJob = new CronJobModel({ status: 'SUCCESS' });
+    // await newCronJob.save();
     console.log('[FINISH CRAWL]');
   } catch (error) {
     console.log(error);

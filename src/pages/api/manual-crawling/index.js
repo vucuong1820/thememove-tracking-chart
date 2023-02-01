@@ -57,7 +57,7 @@ export default async function handler(req, res) {
           $lte: dayEnd,
         },
         themeId: Number.parseInt(themeId),
-        name: 'test',
+        name: name,
       },
       {
         totalSales,
