@@ -14,7 +14,7 @@ export default function useTotalGrowthChart({ themeList, mode }) {
   const [loading, setLoading] = useState(true);
 
   const getTotalSalesOrReviewsAllTime = (item) => {
-    return mode === CHART_GROWTH_MAPPING.REVIEWS.key ? item?.totalReviews ?? 0 : item?.salesPerDay ?? 0;
+    return mode === CHART_GROWTH_MAPPING.REVIEWS.key ? item?.reviewsPerDay ?? 0 : item?.salesPerDay ?? 0;
   };
 
   useEffect(() => {
