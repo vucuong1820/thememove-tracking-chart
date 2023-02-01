@@ -5,19 +5,26 @@ import { format } from 'date-fns';
 import { cloneDeep } from 'lodash';
 import { useEffect, useState } from 'react';
 
+export const FIXED_REVIEW_VALUE = 1;
+
 export default function useTotalGrowthChart({ themeList, mode }) {
   const [selectedDate, setSelectedDate] = useState(getDateRange('this_week'));
   const [datasets, setDatasets] = useState([]);
   const [selectedDatasets, setSelectedDatasets] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const getTotalSalesOrReviewsAllTime = (item) => {
-    return mode === CHART_GROWTH_MAPPING.REVIEWS.key ? item?.totalReviews ?? 0 : item?.totalSales ?? 0;
+    return mode === CHART_GROWTH_MAPPING.REVIEWS.key ? item?.totalReviews ?? 0 : item?.salesPerDay ?? 0;
   };
 
   useEffect(() => {
-    setDatasets([]);
-    setSelectedDatasets([]);
-    handleFetch(selectedDate);
+    (async () => {
+      setDatasets([]);
+      setSelectedDatasets([]);
+      setLoading(true);
+      await handleFetch(selectedDate);
+      setLoading(false);
+    })();
   }, [themeList]);
 
   const fetchData = async (dates, themeId) => {
@@ -26,41 +33,45 @@ export default function useTotalGrowthChart({ themeList, mode }) {
     return result;
   };
 
-  const handleFetch = (dateSelected) => {
+  const handleFetch = async (dateSelected) => {
+    let promise = [];
     for (const theme of themeList) {
-      (async () => {
-        const selectedData = await fetchData(dateSelected, theme.themeId);
-        const smallestNumber = Math.min(...selectedData.items.map((item) => getTotalSalesOrReviewsAllTime(item)));
-        const fixedValue = smallestNumber - (smallestNumber % 10);
-        // console.log({ fixedValue, name: theme.name });
-        const dataList = selectedData.items.map((item) => {
-          const originValue = getTotalSalesOrReviewsAllTime(item);
+      promise.push(
+        (async () => {
+          const selectedData = await fetchData(dateSelected, theme.themeId);
+          const smallestNumber = Math.min(...selectedData.items.map((item) => getTotalSalesOrReviewsAllTime(item)));
+          const fixedValue = smallestNumber - (smallestNumber % 10);
+          // console.log({ fixedValue, name: theme.name });
+          const dataList = selectedData.items.map((item) => {
+            const originValue = getTotalSalesOrReviewsAllTime(item);
 
-          return {
-            key: format(new Date(item?.createdAt), 'MM/dd/yyyy'),
-            // value: originValue - fixedValue,
-            value: originValue,
-            originValue,
+            return {
+              key: format(new Date(item?.createdAt), 'MM/dd/yyyy'),
+              // value: originValue - fixedValue,
+              value: originValue,
+              originValue,
+            };
+          });
+
+          const payload = {
+            data: dataList,
+            name: theme.name,
+            color: theme.color,
           };
-        });
 
-        const payload = {
-          data: dataList,
-          name: theme.name,
-          color: theme.color,
-        };
+          setDatasets((prev) => {
+            const cloneData = cloneDeep(prev);
+            const indexChange = prev.findIndex((x) => x.name === theme.name);
+            if (indexChange > -1) {
+              cloneData[indexChange] = payload;
+            } else cloneData.push(payload);
 
-        setDatasets((prev) => {
-          const cloneData = cloneDeep(prev);
-          const indexChange = prev.findIndex((x) => x.name === theme.name);
-          if (indexChange > -1) {
-            cloneData[indexChange] = payload;
-          } else cloneData.push(payload);
-
-          return cloneData;
-        });
-      })();
+            return cloneData;
+          });
+        })(),
+      );
     }
+    await Promise.allSettled(promise);
   };
 
   const handleSelectLegend = (item) => {
@@ -77,7 +88,9 @@ export default function useTotalGrowthChart({ themeList, mode }) {
 
   const handleConfirm = async () => {
     try {
-      handleFetch(selectedDate);
+      setLoading(true);
+      await handleFetch(selectedDate);
+      setLoading(false);
     } catch (error) {
       // showToast({
       //   error: true,
@@ -85,5 +98,5 @@ export default function useTotalGrowthChart({ themeList, mode }) {
       // });
     }
   };
-  return { setSelectedDate, selectedDate, handleConfirm, datasets, handleSelectLegend, selectedDatasets };
+  return { loading, setSelectedDatasets, setSelectedDate, selectedDate, handleConfirm, datasets, handleSelectLegend, selectedDatasets };
 }

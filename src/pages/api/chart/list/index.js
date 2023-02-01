@@ -38,22 +38,26 @@ export default async function handler(req, res) {
       name: {
         $in: themes.map((theme) => theme.name),
       },
-    }).select('totalSales themeId');
+    }).select('totalSales totalReviews themeId');
 
     const responseGroupByName = groupBy(cloneDeep(response), 'name');
 
     let groups = {};
     for (const themeName of Object.keys(responseGroupByName)) {
       let totalSales;
+      let totalReviews;
       const theme = themes.find((theme) => theme.name === themeName);
       if (theme) {
         const { themeId } = theme;
+        const themeDetails = currentTotalSalesList?.find((x) => x?.themeId === themeId);
 
-        totalSales = currentTotalSalesList?.find((x) => x?.themeId === themeId)?.totalSales;
+        totalSales = themeDetails?.totalSales;
+        totalReviews = themeDetails?.totalReviews;
       }
       groups[themeName] = {
         items: responseGroupByName[themeName],
         totalSales,
+        totalReviews,
       };
     }
 

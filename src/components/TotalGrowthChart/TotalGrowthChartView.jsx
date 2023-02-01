@@ -1,17 +1,22 @@
 import { TooltipContainer } from '@components/chart.styles';
 import DateSelector from '@components/DateSelector';
-import { FIXED_REVIEW_VALUE } from '@components/GrowthChart/useGrowthChart';
+import Loading from '@components/layouts/Loading';
 import PolarisLineChart from '@components/layouts/PolarisLineChart';
 import LegendItem from '@components/LegendItem';
 import TooltipItem from '@components/TooltipItem';
 import { CHART_GROWTH_MAPPING } from '@constants/chart';
+import themeMoveThemes from '@constants/themes';
 import { Card, EmptyState, FormLayout, Heading, Stack, TextContainer } from '@shopify/polaris';
-import { cloneDeep } from 'lodash';
+import { capitalize, cloneDeep } from 'lodash';
 import { useMemo } from 'react';
-import useTotalGrowthChart from './useTotalGrowthChart';
+import useTotalGrowthChart, { FIXED_REVIEW_VALUE } from './useTotalGrowthChart';
 
-function TotalGrowthChart({ themeList, mode = CHART_GROWTH_MAPPING.SALES.key }) {
-  const { setSelectedDate, selectedDate, handleConfirm, datasets, handleSelectLegend, selectedDatasets } = useTotalGrowthChart({ themeList, mode });
+function TotalGrowthChart({ themeList = themeMoveThemes, mode = CHART_GROWTH_MAPPING.SALES.key }) {
+  const { loading, setSelectedDatasets, setSelectedDate, selectedDate, handleConfirm, datasets, handleSelectLegend, selectedDatasets } =
+    useTotalGrowthChart({
+      themeList,
+      mode,
+    });
 
   const fixedValue = useMemo(() => {
     if (mode === CHART_GROWTH_MAPPING.REVIEWS.key) return FIXED_REVIEW_VALUE;
@@ -45,14 +50,18 @@ function TotalGrowthChart({ themeList, mode = CHART_GROWTH_MAPPING.SALES.key }) 
     );
 
   return (
-    <Card>
+    <Card
+      secondaryFooterActions={[
+        { content: 'Show all themes', size: 'slim', disabled: loading || !selectedDatasets?.length, onAction: () => setSelectedDatasets([]) },
+      ]}
+    >
       <Card.Section>
         <Stack>
           <Stack.Item fill>
             <TextContainer>
               <Stack alignment="center">
                 <Stack.Item>
-                  <Heading>{CHART_GROWTH_MAPPING[mode].total} growth</Heading>
+                  <Heading>{capitalize(CHART_GROWTH_MAPPING[mode].key)} growth</Heading>
                 </Stack.Item>
               </Stack>
               <DateSelector onlyDefault={true} onConfirm={handleConfirm} selectedDate={selectedDate} onChangeSelectedDate={setSelectedDate} />
@@ -67,7 +76,7 @@ function TotalGrowthChart({ themeList, mode = CHART_GROWTH_MAPPING.SALES.key }) 
             position: 'relative',
           }}
         >
-          {/* {loading && <Loading.Center size="large" />} */}
+          {loading && <Loading.Center size="large" />}
 
           {datasets?.length > 0 && (
             <PolarisLineChart
@@ -90,6 +99,7 @@ function TotalGrowthChart({ themeList, mode = CHART_GROWTH_MAPPING.SALES.key }) 
               // }}
               showLegend={true}
               renderLegendContent={({ getColorVisionStyles, getColorVisionEventAttrs }) => {
+                if (loading) return themeList.map((x, index) => <LegendItem key={index} />);
                 return datasets.map((item) => {
                   return (
                     <LegendItem

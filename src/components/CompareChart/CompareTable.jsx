@@ -31,7 +31,7 @@ function CompareTable({ rows, loading }) {
       <TableWrapper>
         <DataTable
           columnContentTypes={['text', 'numeric', 'numeric', 'numeric']}
-          headings={['Theme', 'All-time sales', 'Sales growth', 'Review growth', 'Rating']}
+          headings={['Theme', 'All-time sales', 'Sales growth', 'Total Reviews', 'Review growth', 'Rating']}
           rows={loading ? skeletonRows : rows}
         />
       </TableWrapper>

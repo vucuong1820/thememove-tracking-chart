@@ -6,7 +6,7 @@ import { Inngest } from 'inngest';
 const inngest = new Inngest({ name: 'thememove-tracking-chart' });
 
 const handleCron = (index) =>
-  inngest.createScheduledFunction(`AUTO-CRAWLING-${index}`, 'TZ=America/New_York */5 * * * *', async () => {
+  inngest.createScheduledFunction(`AUTO-CRAWLING-${index}`, 'TZ=Australia/Sydney 45 23 * * *', async () => {
     const start = Number.parseInt(index);
     const themeList = [...themeMoveThemes, ...otherThemes];
 

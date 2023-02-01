@@ -30,7 +30,7 @@ export default function useCompareChart({ themeList }) {
     let newDatasets = [];
     let newRows = [];
     for (const themeName in groups) {
-      const { items, totalSales } = groups[themeName];
+      const { items, totalSales, totalReviews } = groups[themeName];
       const themeDetail = themeList.find((x) => x.name === themeName);
       const data = items.map((themeItem) => ({ key: format(new Date(themeItem?.createdAt), 'MM/dd/yyyy'), value: themeItem?.salesPerDay }));
       newDatasets.push({
@@ -38,14 +38,14 @@ export default function useCompareChart({ themeList }) {
         data,
         color: themeDetail?.color,
       });
-      newRows.push(formatThemeRow({ items, detail: themeDetail, totalSales }));
+      newRows.push(formatThemeRow({ items, detail: themeDetail, totalSales, totalReviews }));
     }
     setDatasets(newDatasets);
 
     setRows(newRows);
   };
 
-  const formatThemeRow = ({ items, detail, totalSales }) => {
+  const formatThemeRow = ({ items, detail, totalSales, totalReviews }) => {
     let sales = 0;
     let rating = 5;
     let reviews = 0;
@@ -61,6 +61,7 @@ export default function useCompareChart({ themeList }) {
       </TextStyle>,
       totalSales?.toLocaleString('en-US'),
       sales,
+      totalReviews,
       reviews,
       rating,
     ];
