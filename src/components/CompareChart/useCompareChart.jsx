@@ -130,9 +130,27 @@ export default function useCompareChart({ themeList }) {
   };
 
   const handleConfirm = async () => {
-    setLoading(true);
-    await handleChange();
-    setLoading(false);
+    try {
+      setLoading(true);
+      if (selectedThemes?.length === 1) {
+        const { newThemeDatasets, newGrowthRate, newTotalSelectedQty } = await handleFetchSingleTheme({
+          dateSelected: selectedDate,
+          dateCompared: comparedDate,
+          theme: selectedThemes?.[0],
+        });
+        setSelectedDatasets(newThemeDatasets);
+        setGrowthRate(newGrowthRate);
+        setTotalSelectedQty(newTotalSelectedQty);
+      } else {
+        await handleChange(selectedDate);
+      }
+      setLoading(false);
+    } catch (error) {
+      // showToast({
+      //   error: true,
+      //   message: error?.message,
+      // });
+    }
   };
 
   return {
