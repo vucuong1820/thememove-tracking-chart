@@ -1,39 +1,29 @@
 import CompareChart from '@components/CompareChart';
 import { compareThemes } from '@constants/themes';
-import { ActionList, Button, FormLayout, Page, Popover, TextStyle } from '@shopify/polaris';
-import { useCallback, useMemo, useState } from 'react';
+import { FormLayout, Page, TextStyle } from '@shopify/polaris';
+import { cloneDeep } from 'lodash';
+import { useRouter } from 'next/router';
+import { useMemo } from 'react';
 
 function View() {
-  const [popoverActive, setPopoverActive] = useState(false);
-  const [selected, setSelected] = useState('MinimogWP');
+  const router = useRouter();
+  const params = new URLSearchParams(location);
 
-  const togglePopoverActive = useCallback(() => setPopoverActive((popoverActive) => !popoverActive), []);
-
-  const activator = (
-    <Button onClick={togglePopoverActive} disclosure>
-      {selected}
-    </Button>
-  );
-
-  const themeList = ['Structure', 'MaxCoach', 'MinimogWP', 'Heli', 'Brook'].map((theme) => ({
-    content: theme,
-    onAction: () => {
-      setSelected(theme);
-      togglePopoverActive();
-    },
-    active: theme === selected,
-  }));
-
-  const themeListCompare = useMemo(() => compareThemes?.[selected], [selected]);
+  const themeListCompare = useMemo(() => {
+    const theme = router.query?.theme || 'MinimogWP';
+    return compareThemes?.[theme];
+  }, [params]);
 
   return (
     <Page fullWidth>
+      <div style={{ marginBottom: 'var(--p-space-8)' }}>
+        <TextStyle>
+          Tracking theme: <TextStyle variation="strong">{router.query?.theme || 'MinimogWP'}</TextStyle>
+        </TextStyle>
+      </div>
       <FormLayout>
-        <TextStyle variation="strong">Choose tracking theme</TextStyle>
-        <Popover active={popoverActive} activator={activator} onClose={togglePopoverActive}>
-          <ActionList actionRole="menuitem" items={themeList} />
-        </Popover>
-        <CompareChart showLineChart={true} themeList={themeListCompare} />
+        <CompareChart showLineChart={false} themeList={themeListCompare} />
+        <CompareChart showTable={false} themeList={themeListCompare} />
       </FormLayout>
     </Page>
   );

@@ -1,19 +1,26 @@
 import { CHART_GROWTH_MAPPING } from '@constants/chart';
+import getCompareDate from '@helpers/getCompareDate';
 import getDateRange from '@helpers/getDateRange';
 import getGrowthChartData from '@services/getGrowthChartData';
 import { format } from 'date-fns';
 import { cloneDeep } from 'lodash';
 import { useEffect, useState } from 'react';
+import useFetchSingleTheme from 'src/hooks/useFetchSingleTheme';
 
 export const FIXED_REVIEW_VALUE = 1;
 
 export default function useTotalGrowthChart({ themeList, mode }) {
   const [selectedDate, setSelectedDate] = useState(getDateRange('this_week'));
+  const [comparedDate, setComparedDate] = useState(getCompareDate(getDateRange('this_week')));
   const [datasets, setDatasets] = useState([]);
+  const [selectedThemes, setSelectedThemes] = useState([]);
   const [selectedDatasets, setSelectedDatasets] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [growthRate, setGrowthRate] = useState();
+  const [totalSelectedQty, setTotalSelectedQty] = useState(0);
+  const { handleFetchSingleTheme } = useFetchSingleTheme(mode);
 
-  const getTotalSalesOrReviewsAllTime = (item) => {
+  const getSalesOrReviewsPerDay = (item) => {
     return mode === CHART_GROWTH_MAPPING.REVIEWS.key ? item?.reviewsPerDay ?? 0 : item?.salesPerDay ?? 0;
   };
 
@@ -27,6 +34,10 @@ export default function useTotalGrowthChart({ themeList, mode }) {
     })();
   }, [themeList]);
 
+  useEffect(() => {
+    setComparedDate(getCompareDate(selectedDate));
+  }, [selectedDate]);
+
   const fetchData = async (dates, themeId) => {
     if (!dates) return null;
     const result = await getGrowthChartData(dates, themeId);
@@ -39,15 +50,11 @@ export default function useTotalGrowthChart({ themeList, mode }) {
       promise.push(
         (async () => {
           const selectedData = await fetchData(dateSelected, theme.themeId);
-          const smallestNumber = Math.min(...selectedData.items.map((item) => getTotalSalesOrReviewsAllTime(item)));
-          const fixedValue = smallestNumber - (smallestNumber % 10);
-          // console.log({ fixedValue, name: theme.name });
           const dataList = selectedData.items.map((item) => {
-            const originValue = getTotalSalesOrReviewsAllTime(item);
+            const originValue = getSalesOrReviewsPerDay(item);
 
             return {
               key: format(new Date(item?.createdAt), 'MM/dd/yyyy'),
-              // value: originValue - fixedValue,
               value: originValue,
               originValue,
             };
@@ -57,6 +64,8 @@ export default function useTotalGrowthChart({ themeList, mode }) {
             data: dataList,
             name: theme.name,
             color: theme.color,
+            total: mode === CHART_GROWTH_MAPPING.REVIEWS.key ? selectedData?.totalReviews ?? 0 : selectedData?.totalSales ?? 0,
+            detail: theme,
           };
 
           setDatasets((prev) => {
@@ -74,22 +83,53 @@ export default function useTotalGrowthChart({ themeList, mode }) {
     await Promise.allSettled(promise);
   };
 
-  const handleSelectLegend = (item) => {
-    setSelectedDatasets((prev) => {
-      const index = prev.findIndex((data) => data?.name === item?.name);
-      if (index !== -1) {
-        const cloneData = cloneDeep(prev);
-        cloneData.splice(index, 1);
-        return cloneData;
-      }
-      return [...prev, item];
-    });
+  const handleSelectLegend = async (item) => {
+    const index = selectedThemes.findIndex((data) => data?.themeId === item?.detail?.themeId);
+    let newSelectedThemes;
+    if (index !== -1) {
+      newSelectedThemes = cloneDeep(selectedThemes);
+      newSelectedThemes.splice(index, 1);
+    } else {
+      newSelectedThemes = [...selectedThemes, item?.detail];
+    }
+
+    setSelectedThemes(newSelectedThemes);
+
+    if (newSelectedThemes?.length === 1) {
+      setLoading(true);
+      const { newThemeDatasets, newGrowthRate, newTotalSelectedQty } = await handleFetchSingleTheme({
+        dateSelected: selectedDate,
+        dateCompared: comparedDate,
+        theme: newSelectedThemes?.[0],
+      });
+      setSelectedDatasets(newThemeDatasets);
+      setGrowthRate(newGrowthRate);
+      setTotalSelectedQty(newTotalSelectedQty);
+
+      setLoading(false);
+    } else {
+      setSelectedDatasets(() => {
+        const newSelectedDatasets = datasets.filter((data) => newSelectedThemes.map((x) => x.name).includes(data?.name));
+        return newSelectedDatasets;
+      });
+    }
   };
 
   const handleConfirm = async () => {
     try {
       setLoading(true);
-      await handleFetch(selectedDate);
+      if (selectedThemes?.length === 1) {
+        const { newThemeDatasets, newGrowthRate, newTotalSelectedQty } = await handleFetchSingleTheme({
+          dateSelected: selectedDate,
+          dateCompared: comparedDate,
+          theme: selectedThemes?.[0],
+        });
+        setSelectedDatasets(newThemeDatasets);
+        setGrowthRate(newGrowthRate);
+        setTotalSelectedQty(newTotalSelectedQty);
+      } else {
+        await handleFetch(selectedDate);
+      }
       setLoading(false);
     } catch (error) {
       // showToast({
@@ -98,5 +138,19 @@ export default function useTotalGrowthChart({ themeList, mode }) {
       // });
     }
   };
-  return { loading, setSelectedDatasets, setSelectedDate, selectedDate, handleConfirm, datasets, handleSelectLegend, selectedDatasets };
+  return {
+    totalSelectedQty,
+    growthRate,
+    selectedThemes,
+    comparedDate,
+    setComparedDate,
+    loading,
+    setSelectedThemes,
+    setSelectedDate,
+    selectedDate,
+    handleConfirm,
+    datasets,
+    handleSelectLegend,
+    selectedDatasets,
+  };
 }

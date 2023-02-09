@@ -11,10 +11,10 @@ connectMongo();
 
 export default async function handler(req, res) {
   try {
-    const { startingDay, endingDay, themeList } = req.query;
+    const { startingDay, endingDay, themeList, compareStart, compareEnd } = req.query;
 
     const themes = themeList ? JSON.parse(themeList) : themeMoveThemes;
-    const filters = {
+    const selectedFilters = {
       createdAt: {
         $gte: startingDay,
         $lte: endingDay,
@@ -23,8 +23,18 @@ export default async function handler(req, res) {
         $in: themes.map((theme) => theme.name),
       },
     };
+    const selectedResponse = await Theme.find(selectedFilters);
 
-    const response = await Theme.find(filters);
+    const compareFilters = {
+      createdAt: {
+        $gte: compareStart,
+        $lte: compareEnd,
+      },
+      name: {
+        $in: themes.map((theme) => theme.name),
+      },
+    };
+    const comparedResponse = await Theme.find(compareFilters);
 
     const currentDate = new Date();
     const dayStart = zonedTimeToUtc(startOfDay(utcToZonedTime(currentDate, TIME_ZONE)), TIME_ZONE).toISOString();
@@ -40,29 +50,54 @@ export default async function handler(req, res) {
       },
     }).select('totalSales totalReviews themeId');
 
-    const responseGroupByName = groupBy(cloneDeep(response), 'name');
+    const selectedResponseGroupByName = groupBy(cloneDeep(selectedResponse), 'name');
+    const comparedResponseGroupByName = groupBy(cloneDeep(comparedResponse), 'name');
 
-    let groups = {};
-    for (const themeName of Object.keys(responseGroupByName)) {
-      let totalSales;
-      let totalReviews;
-      const theme = themes.find((theme) => theme.name === themeName);
-      if (theme) {
-        const { themeId } = theme;
-        const themeDetails = currentTotalSalesList?.find((x) => x?.themeId === themeId);
+    // let groups = {};
+    // for (const themeName of Object.keys(responseGroupByName)) {
+    //   let totalSales;
+    //   let totalReviews;
+    //   const theme = themes.find((theme) => theme.name === themeName);
+    //   if (theme) {
+    //     const { themeId } = theme;
+    //     const themeDetails = currentTotalSalesList?.find((x) => x?.themeId === themeId);
 
-        totalSales = themeDetails?.totalSales;
-        totalReviews = themeDetails?.totalReviews;
-      }
-      groups[themeName] = {
-        items: responseGroupByName[themeName],
-        totalSales,
-        totalReviews,
-      };
-    }
+    //     totalSales = themeDetails?.totalSales;
+    //     totalReviews = themeDetails?.totalReviews;
+    //   }
+    //   groups[themeName] = {
+    //     items: responseGroupByName[themeName],
+    //     totalSales,
+    //     totalReviews,
+    //   };
+    // }
+    const selected = mappingResponseByName(selectedResponseGroupByName, themes, currentTotalSalesList);
+    const compared = mappingResponseByName(comparedResponseGroupByName, themes, currentTotalSalesList);
 
-    res.status(200).json(groups);
+    res.status(200).json({ selected, compared });
   } catch (error) {
     res.status(error.response.status).send(error.response.data);
   }
 }
+
+const mappingResponseByName = (object, themes, currentTotal) => {
+  let result = {};
+  for (const themeName of Object.keys(object)) {
+    let totalSales;
+    let totalReviews;
+    const theme = themes.find((theme) => theme.name === themeName);
+    if (theme) {
+      const { themeId } = theme;
+      const themeDetails = currentTotal?.find((x) => x?.themeId === themeId);
+
+      totalSales = themeDetails?.totalSales;
+      totalReviews = themeDetails?.totalReviews;
+    }
+    result[themeName] = {
+      items: object[themeName],
+      totalSales,
+      totalReviews,
+    };
+  }
+  return result;
+};

@@ -22,8 +22,15 @@ export default function useDateSelector({ onConfirm, selectedDate, onlyCompare, 
 
   useEffect(() => {
     if (!compare) onChangeComparedDate(null);
-    else if (selectedDate) onChangeComparedDate(getCompareDate(selectedDate));
+    else if (selectedDate) {
+      onChangeComparedDate(getCompareDate(selectedDate));
+    }
   }, [compare]);
+
+  useEffect(() => {
+    setCompare(onlyCompare || !onlyDefault || false);
+  }, [onlyCompare, onlyDefault]);
+
   const handleChangeSelect = (newOpt) => {
     setDateOptions((prev) => prev.filter((opt) => opt.value !== 'custom'));
     setDateSelectedOption(newOpt);

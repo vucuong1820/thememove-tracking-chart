@@ -23,7 +23,7 @@ const BannerStyled = styled.div`
   }
 `;
 export default function App({ Component, pageProps }) {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     (async () => {
       await manualCrawl();
