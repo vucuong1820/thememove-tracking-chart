@@ -4,7 +4,7 @@ import getDateRange from '@helpers/getDateRange';
 import getGrowthChartData from '@services/getGrowthChartData';
 import { format } from 'date-fns';
 import { cloneDeep } from 'lodash';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useFetchSingleTheme from 'src/hooks/useFetchSingleTheme';
 
 export const FIXED_REVIEW_VALUE = 1;
@@ -19,6 +19,13 @@ export default function useTotalGrowthChart({ themeList, mode }) {
   const [growthRate, setGrowthRate] = useState();
   const [totalSelectedQty, setTotalSelectedQty] = useState(0);
   const { handleFetchSingleTheme } = useFetchSingleTheme(mode);
+  const cacheDate = useRef();
+
+  useEffect(() => {
+    if (selectedThemes?.length !== 1) {
+      cacheDate.current = selectedDate;
+    }
+  }, [selectedDate]);
 
   const getSalesOrReviewsPerDay = (item) => {
     return mode === CHART_GROWTH_MAPPING.REVIEWS.key ? item?.reviewsPerDay ?? 0 : item?.salesPerDay ?? 0;
@@ -27,7 +34,7 @@ export default function useTotalGrowthChart({ themeList, mode }) {
   useEffect(() => {
     (async () => {
       setDatasets([]);
-      setSelectedDatasets([]);
+      setSelectedThemes([]);
       setLoading(true);
       await handleFetch(selectedDate);
       setLoading(false);
@@ -108,6 +115,7 @@ export default function useTotalGrowthChart({ themeList, mode }) {
 
       setLoading(false);
     } else {
+      if (cacheDate.current) setSelectedDate(cacheDate.current);
       setSelectedDatasets(() => {
         const newSelectedDatasets = datasets.filter((data) => newSelectedThemes.map((x) => x.name).includes(data?.name));
         return newSelectedDatasets;

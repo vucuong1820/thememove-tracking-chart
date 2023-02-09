@@ -5,7 +5,7 @@ import getDateRange from '@helpers/getDateRange';
 import getCompareChartDataService from '@services/getCompareChartDataService';
 import { format } from 'date-fns';
 import { cloneDeep } from 'lodash';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useFetchSingleTheme from 'src/hooks/useFetchSingleTheme';
 
 export default function useCompareChart({ themeList }) {
@@ -18,6 +18,13 @@ export default function useCompareChart({ themeList }) {
   const [selectedDatasets, setSelectedDatasets] = useState([]);
   const [growthRate, setGrowthRate] = useState();
   const [totalSelectedQty, setTotalSelectedQty] = useState(0);
+  const cacheDate = useRef();
+
+  useEffect(() => {
+    if (selectedThemes?.length !== 1) {
+      cacheDate.current = selectedDate;
+    }
+  }, [selectedDate]);
 
   const { handleFetchSingleTheme } = useFetchSingleTheme();
 
@@ -32,6 +39,7 @@ export default function useCompareChart({ themeList }) {
   useEffect(() => {
     (async () => {
       setLoading(true);
+      setSelectedThemes([]);
       await handleChange();
       setLoading(false);
     })();
@@ -39,7 +47,11 @@ export default function useCompareChart({ themeList }) {
 
   const handleChange = async () => {
     setSelectedDatasets([]);
-    const { selected, compared } = await getCompareChartDataService({ date: selectedDate, comparedDate, themeList });
+    const { selected, compared } = await getCompareChartDataService({
+      date: selectedDate,
+      comparedDate: comparedDate || getCompareDate(selectedDate),
+      themeList,
+    });
     let newDatasets = [];
     let newRows = [];
     for (const themeName in selected) {
@@ -122,6 +134,7 @@ export default function useCompareChart({ themeList }) {
 
       setLoading(false);
     } else {
+      if (cacheDate.current) setSelectedDate(cacheDate.current);
       setSelectedDatasets(() => {
         const newSelectedDatasets = datasets.filter((data) => newSelectedThemes.map((x) => x.name).includes(data?.name));
         return newSelectedDatasets;

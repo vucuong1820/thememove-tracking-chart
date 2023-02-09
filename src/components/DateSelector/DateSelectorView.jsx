@@ -40,7 +40,6 @@ function DateSelector({
       <div style={{ textTransform: 'capitalize' }}>{dateOptions.find((x) => x.value === dateSelectedOption)?.label}</div>
     </Button>
   );
-  // conso
   return (
     <Popover active={active} activator={activator} onClose={handleCloseDateSelector} fluidContent fullHeight>
       <Popover.Pane>
