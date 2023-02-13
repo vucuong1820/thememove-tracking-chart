@@ -103,11 +103,11 @@ export default function useCompareChart({ themeList }) {
         value: sales,
         percentage: Number.parseFloat((((sales - comparedSales) / (comparedSales || 1)) * 100).toFixed(1)),
       },
+      totalReviews,
       {
-        value: totalReviews,
+        value: reviews,
         percentage: Number.parseFloat((((reviews - comparedReviews) / (comparedReviews || 1)) * 100).toFixed(1)),
       },
-      reviews,
       rating,
     ];
   };
