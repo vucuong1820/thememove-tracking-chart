@@ -117,12 +117,16 @@ const Item = ({ item }) => {
     setExpand((prev) => !prev);
   };
 
+  const disable = !!subItems?.length;
+
   return (
     <li className="Polaris-Navigation__ListItem">
       <div className="Polaris-Navigation__ItemInnerWrapper">
         <button
           type="button"
-          className={`Polaris-Navigation__Item ${location.pathname === item?.url && 'Polaris-Navigation__Item--selected'}`}
+          className={`Polaris-Navigation__Item ${location.pathname === item?.url && 'Polaris-Navigation__Item--selected'} ${
+            disable && 'Polaris-Navigation__Item--disabled'
+          }`}
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -144,7 +148,6 @@ const Item = ({ item }) => {
         <div className={`Polaris-Navigation__SecondaryNavigation ${expand ? 'Polaris-Navigation--isExpanded' : ''} `}>
           <ul className="Polaris-Navigation__List">
             {subItems.map((subItem, index) => {
-              // console.log(`${location.pathname}${location.search}`÷, sub);
               return (
                 <li
                   key={index}

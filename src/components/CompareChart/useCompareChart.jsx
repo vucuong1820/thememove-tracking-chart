@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 import getCompareDate from '@helpers/getCompareDate';
 import getDateRange from '@helpers/getDateRange';
 import getCompareChartDataService from '@services/getCompareChartDataService';
@@ -7,6 +5,7 @@ import { format } from 'date-fns';
 import { cloneDeep } from 'lodash';
 import { useEffect, useRef, useState } from 'react';
 import useFetchSingleTheme from 'src/hooks/useFetchSingleTheme';
+import { useNotificationStore } from 'src/providers/NotificationProvider';
 
 export default function useCompareChart({ themeList }) {
   const [datasets, setDatasets] = useState([]);
@@ -19,6 +18,7 @@ export default function useCompareChart({ themeList }) {
   const [growthRate, setGrowthRate] = useState();
   const [totalSelectedQty, setTotalSelectedQty] = useState(0);
   const cacheDate = useRef();
+  const { showToast } = useNotificationStore();
 
   useEffect(() => {
     if (selectedThemes?.length !== 1) {
@@ -46,34 +46,40 @@ export default function useCompareChart({ themeList }) {
   }, [themeList]);
 
   const handleChange = async () => {
-    setSelectedDatasets([]);
-    const { selected, compared } = await getCompareChartDataService({
-      date: selectedDate,
-      comparedDate: comparedDate || getCompareDate(selectedDate),
-      themeList,
-    });
-    let newDatasets = [];
-    let newRows = [];
-    for (const themeName in selected) {
-      const { items, totalSales, totalReviews } = selected[themeName];
-      const themeDetail = themeList.find((x) => x.name === themeName);
-      const data = items.map((themeItem) => ({ key: format(new Date(themeItem?.createdAt), 'MM/dd/yyyy'), value: themeItem?.salesPerDay }));
-      newDatasets.push({
-        name: themeName,
-        data,
-        color: themeDetail?.color,
-        total: totalSales,
+    try {
+      setSelectedDatasets([]);
+      const { selected, compared } = await getCompareChartDataService({
+        date: selectedDate,
+        comparedDate: comparedDate || getCompareDate(selectedDate),
+        themeList,
       });
-      newRows.push(formatThemeRow({ items, totalSales, totalReviews, compared: compared[themeName] }));
-    }
-    setDatasets(newDatasets);
+      let newDatasets = [];
+      let newRows = [];
+      for (const themeName in selected) {
+        const { items, totalSales, totalReviews } = selected[themeName];
+        const themeDetail = themeList.find((x) => x.name === themeName);
+        const data = items.map((themeItem) => ({ key: format(new Date(themeItem?.createdAt), 'MM/dd/yyyy'), value: themeItem?.salesPerDay }));
+        newDatasets.push({
+          name: themeName,
+          data,
+          color: themeDetail?.color,
+          total: totalSales,
+        });
+        newRows.push(formatThemeRow({ items, totalSales, totalReviews, compared: compared[themeName] }));
+      }
+      setDatasets(newDatasets);
 
-    setRows(newRows);
+      setRows(newRows);
+    } catch (error) {
+      showToast({
+        error: true,
+        message: error?.message,
+      });
+    }
   };
 
   const formatThemeRow = ({ items, totalSales, totalReviews, compared }) => {
     const { items: comparedItems } = compared;
-    console.log(comparedItems);
     let sales = 0;
     let rating = 5;
     let reviews = 0;
@@ -127,7 +133,6 @@ export default function useCompareChart({ themeList }) {
         dateCompared: comparedDate,
         theme: newSelectedThemes?.[0],
       });
-      console.log(newGrowthRate);
       setSelectedDatasets(newThemeDatasets);
       setGrowthRate(newGrowthRate);
       setTotalSelectedQty(newTotalSelectedQty);
@@ -143,27 +148,20 @@ export default function useCompareChart({ themeList }) {
   };
 
   const handleConfirm = async () => {
-    try {
-      setLoading(true);
-      if (selectedThemes?.length === 1) {
-        const { newThemeDatasets, newGrowthRate, newTotalSelectedQty } = await handleFetchSingleTheme({
-          dateSelected: selectedDate,
-          dateCompared: comparedDate,
-          theme: selectedThemes?.[0],
-        });
-        setSelectedDatasets(newThemeDatasets);
-        setGrowthRate(newGrowthRate);
-        setTotalSelectedQty(newTotalSelectedQty);
-      } else {
-        await handleChange(selectedDate);
-      }
-      setLoading(false);
-    } catch (error) {
-      // showToast({
-      //   error: true,
-      //   message: error?.message,
-      // });
+    setLoading(true);
+    if (selectedThemes?.length === 1) {
+      const { newThemeDatasets, newGrowthRate, newTotalSelectedQty } = await handleFetchSingleTheme({
+        dateSelected: selectedDate,
+        dateCompared: comparedDate,
+        theme: selectedThemes?.[0],
+      });
+      setSelectedDatasets(newThemeDatasets);
+      setGrowthRate(newGrowthRate);
+      setTotalSelectedQty(newTotalSelectedQty);
+    } else {
+      await handleChange(selectedDate);
     }
+    setLoading(false);
   };
 
   return {

@@ -7,7 +7,7 @@ export const CHART_GROWTH_MAPPING = {
   REVIEWS: { key: 'REVIEWS', title: 'Reviews growth through time', total: 'All time reviews' },
 };
 
-export const TOP5_THEMES = ['Brook', 'Heli', 'MaxCoach', 'MinimogWP', 'Structure', 'Brook'];
+export const TOP5_THEMES = ['Brook', 'Heli', 'MaxCoach', 'MinimogWP', 'Structure'];
 
 export const CATEGORIES = [
   {

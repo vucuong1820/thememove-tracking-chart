@@ -90,7 +90,7 @@ function CompareChart({ showTable = true, showLineChart = true, themeList = them
                     <SkeletonThumbnail />
                   ) : (
                     <>
-                      <Heading>{totalTracking}</Heading>
+                      <Heading>{totalTracking?.toLocaleString('en-US')}</Heading>
                       <TextStyle variation="subdued">All time sales</TextStyle>
                     </>
                   )}
@@ -124,6 +124,12 @@ function CompareChart({ showTable = true, showLineChart = true, themeList = them
                 theme="Light"
                 tooltipOptions={{
                   renderTooltipContent: renderTooltip,
+                }}
+                yAxisOptions={{
+                  labelFormatter: (value) => {
+                    const condition = Number.isInteger(value);
+                    return condition ? value?.toString() ?? '' : '';
+                  },
                 }}
                 showLegend={true}
                 renderLegendContent={({ getColorVisionStyles, getColorVisionEventAttrs }) => {

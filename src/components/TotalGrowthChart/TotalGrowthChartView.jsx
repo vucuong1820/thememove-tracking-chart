@@ -108,7 +108,7 @@ function TotalGrowthChart({ themeList = themeMoveThemes, mode = CHART_GROWTH_MAP
                   <SkeletonThumbnail />
                 ) : (
                   <>
-                    <Heading>{totalTracking}</Heading>
+                    <Heading>{totalTracking?.toLocaleString('en-US')}</Heading>
                     <TextStyle variation="subdued">{CHART_GROWTH_MAPPING?.[mode]?.total}</TextStyle>
                   </>
                 )}
@@ -142,6 +142,12 @@ function TotalGrowthChart({ themeList = themeMoveThemes, mode = CHART_GROWTH_MAP
               theme="Light"
               tooltipOptions={{
                 renderTooltipContent: renderTooltip,
+              }}
+              yAxisOptions={{
+                labelFormatter: (value) => {
+                  const condition = Number.isInteger(value);
+                  return condition ? value?.toString() ?? '' : '';
+                },
               }}
               showLegend={true}
               renderLegendContent={({ getColorVisionStyles, getColorVisionEventAttrs }) => {

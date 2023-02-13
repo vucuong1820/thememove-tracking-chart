@@ -8,7 +8,7 @@ function View() {
     <Page fullWidth>
       <TotalGrowthChart mode={CHART_GROWTH_MAPPING.SALES.key} />
       <TotalGrowthChart mode={CHART_GROWTH_MAPPING.REVIEWS.key} />
-      <CompareChart />
+      <CompareChart showLineChart={false} />
     </Page>
   );
 }

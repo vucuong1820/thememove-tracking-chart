@@ -1,7 +1,6 @@
 import CompareChart from '@components/CompareChart';
 import { compareThemes } from '@constants/themes';
 import { FormLayout, Page, TextStyle } from '@shopify/polaris';
-import { cloneDeep } from 'lodash';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 

@@ -71,7 +71,6 @@ export default function CompareTable({ rows, loading }) {
   const tableRows = sortedRows ? sortedRows : initialRows;
 
   const handleSort = (index, direction) => {
-    const newRows = sortedRows ? sortedRows : initialRows;
     setSortedRows(sortNumericData(tableRows, index, direction));
   };
 
@@ -81,10 +80,10 @@ export default function CompareTable({ rows, loading }) {
         {row[0]}
       </TextStyle>,
       ...cloneDeep(row.splice(1)).map((value, index) => {
-        if (isNil(value?.value)) return value;
+        if (isNil(value?.value)) return value?.toLocaleString('en-US');
         return (
           <GrowthNumberContainer key={index}>
-            <p className="GrowthNumber__Value">{value?.value}</p>
+            <p className="GrowthNumber__Value">{value?.value?.toLocaleString('en-US')}</p>
             <Icon color={value?.percentage > 0 ? 'success' : 'critical'} source={value?.percentage > 0 ? ArrowUpMinor : ArrowDownMinor} />
             <span>
               <TextStyle variation={value?.percentage > 0 ? 'positive' : 'negative'}>{value?.percentage}%</TextStyle>
@@ -99,7 +98,7 @@ export default function CompareTable({ rows, loading }) {
       <TableWrapper>
         <DataTable
           columnContentTypes={['text', 'numeric', 'numeric', 'numeric', 'numeric', 'numeric']}
-          headings={['Heading', 'All-time sales', 'Sales growth', 'Total Reviews', 'Review growth', 'Rating']}
+          headings={['Theme', 'All-time sales', 'Sales growth', 'Total Reviews', 'Review growth', 'Rating']}
           rows={loading ? skeletonRows : dataTableRows}
           sortable={[false, true, true, true, true, true]}
           defaultSortDirection="descending"

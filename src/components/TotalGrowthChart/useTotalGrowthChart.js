@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import { cloneDeep } from 'lodash';
 import { useEffect, useRef, useState } from 'react';
 import useFetchSingleTheme from 'src/hooks/useFetchSingleTheme';
+import { useNotificationStore } from 'src/providers/NotificationProvider';
 
 export const FIXED_REVIEW_VALUE = 1;
 
@@ -20,6 +21,7 @@ export default function useTotalGrowthChart({ themeList, mode }) {
   const [totalSelectedQty, setTotalSelectedQty] = useState(0);
   const { handleFetchSingleTheme } = useFetchSingleTheme(mode);
   const cacheDate = useRef();
+  const { showToast } = useNotificationStore();
 
   useEffect(() => {
     if (selectedThemes?.length !== 1) {
@@ -47,8 +49,16 @@ export default function useTotalGrowthChart({ themeList, mode }) {
 
   const fetchData = async (dates, themeId) => {
     if (!dates) return null;
-    const result = await getGrowthChartData(dates, themeId);
-    return result;
+    try {
+      const result = await getGrowthChartData(dates, themeId);
+      return result;
+    } catch (error) {
+      showToast({
+        error: true,
+        message: error?.message,
+      });
+      return null;
+    }
   };
 
   const handleFetch = async (dateSelected) => {
@@ -57,6 +67,7 @@ export default function useTotalGrowthChart({ themeList, mode }) {
       promise.push(
         (async () => {
           const selectedData = await fetchData(dateSelected, theme.themeId);
+          if (!selectedData) return;
           const dataList = selectedData.items.map((item) => {
             const originValue = getSalesOrReviewsPerDay(item);
 
@@ -140,10 +151,10 @@ export default function useTotalGrowthChart({ themeList, mode }) {
       }
       setLoading(false);
     } catch (error) {
-      // showToast({
-      //   error: true,
-      //   message: error?.message,
-      // });
+      showToast({
+        error: true,
+        message: error?.message,
+      });
     }
   };
   return {

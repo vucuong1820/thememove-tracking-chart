@@ -10,6 +10,7 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import NotificationProvider from 'src/providers/NotificationProvider';
 import styled from 'styled-components';
 const PolarisVizProvider = dynamic(() => import('@shopify/polaris-viz').then((module) => module.PolarisVizProvider), { ssr: false });
 
@@ -49,10 +50,12 @@ export default function App({ Component, pageProps }) {
             </BannerStyled>
           ) : (
             <AppFrame>
-              <Head>
-                <title>ThemeMove Tracking</title>
-              </Head>
-              <Component {...pageProps} />
+              <NotificationProvider>
+                <Head>
+                  <title>ThemeMove Tracking</title>
+                </Head>
+                <Component {...pageProps} />
+              </NotificationProvider>
             </AppFrame>
           )}
         </BrowserRouter>

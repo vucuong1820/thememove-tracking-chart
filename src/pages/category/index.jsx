@@ -15,7 +15,7 @@ function View() {
     return themeMoveThemes.filter((theme) => intersection(theme.category, categoriesSelected).length > 0);
   }, [router.query]);
 
-  const categoryLabel = CATEGORIES.find((x) => x.path === router.query?.name ?? 'corporate').key;
+  const categoryLabel = CATEGORIES.find((x) => x.path === (router.query?.name ?? 'corporate')).key;
 
   return (
     <Page fullWidth>
