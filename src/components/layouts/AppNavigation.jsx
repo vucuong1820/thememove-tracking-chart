@@ -53,8 +53,8 @@ const navList = [
   //   ],
   // },
   {
-    separator: true,
-    title: 'Page tabs',
+    // separator: true,
+    // title: 'Page tabs',
     items: [
       {
         label: 'Overview',
