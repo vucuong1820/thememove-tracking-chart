@@ -2,7 +2,7 @@ import { Card, DataTable, Icon, SkeletonDisplayText, SkeletonThumbnail, TextStyl
 import { ArrowDownMinor, ArrowUpMinor } from '@shopify/polaris-icons';
 import { cloneDeep, isNil } from 'lodash';
 import { useRouter } from 'next/router';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 const skeletonRows = Array.from({ length: 5 }).map(() => [
@@ -68,6 +68,10 @@ export default function CompareTable({ rows, loading }) {
     return cloneDeep(rows).sort((a, b) => a[0].localeCompare(b[0]));
   }, [rows]);
 
+  useEffect(() => {
+    setSortedRows(null);
+  }, [rows]);
+
   const tableRows = sortedRows ? sortedRows : initialRows;
 
   const handleSort = (index, direction) => {
@@ -92,7 +96,7 @@ export default function CompareTable({ rows, loading }) {
         );
       }),
     ]);
-  }, [tableRows]);
+  }, [tableRows, rows]);
   return (
     <Card.Section>
       <TableWrapper>

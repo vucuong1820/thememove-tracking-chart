@@ -51,7 +51,7 @@ export default function useFetchSingleTheme(mode = CHART_GROWTH_MAPPING.SALES.ke
         data: dataList,
         name: index === 0 ? 'Selected' : 'Compared',
         isComparison: index === 1,
-        // color: themeColor,
+        color: theme?.color,
       });
     }
 

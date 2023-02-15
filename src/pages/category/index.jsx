@@ -17,7 +17,6 @@ function View() {
   }, [router.query]);
 
   const categoryLabel = CATEGORIES.find((x) => x.path === (router.query?.name ?? 'corporate')).key;
-
   return (
     <Page fullWidth>
       <FormLayout>
