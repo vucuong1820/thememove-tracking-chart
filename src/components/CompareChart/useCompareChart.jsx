@@ -68,6 +68,10 @@ export default function useCompareChart({ themeList }) {
         newRows.push(formatThemeRow({ items, totalSales, totalReviews, compared: compared[themeName] }));
       }
       setDatasets(newDatasets);
+      setSelectedDatasets(() => {
+        const newSelectedDatasets = newDatasets.filter((data) => selectedThemes.map((x) => x.name).includes(data?.name));
+        return newSelectedDatasets;
+      });
 
       setRows(newRows);
     } catch (error) {
@@ -78,8 +82,8 @@ export default function useCompareChart({ themeList }) {
     }
   };
 
-  const formatThemeRow = ({ items, totalSales, totalReviews, compared }) => {
-    const { items: comparedItems } = compared;
+  const formatThemeRow = ({ items = [], totalSales, totalReviews, compared }) => {
+    const comparedItems = compared?.items ?? [];
     let sales = 0;
     let rating = 5;
     let reviews = 0;

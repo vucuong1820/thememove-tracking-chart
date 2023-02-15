@@ -1,3 +1,4 @@
+import CompareChart from '@components/CompareChart';
 import TotalGrowthChart from '@components/TotalGrowthChart';
 import { CATEGORIES, CHART_GROWTH_MAPPING } from '@constants/chart';
 import themeMoveThemes from '@constants/themes';
@@ -25,6 +26,7 @@ function View() {
         </TextStyle>
         <TotalGrowthChart themeList={themeListSatisfied} mode={CHART_GROWTH_MAPPING.SALES.key} />
         <TotalGrowthChart themeList={themeListSatisfied} mode={CHART_GROWTH_MAPPING.REVIEWS.key} />
+        <CompareChart themeList={themeListSatisfied} showLineChart={false} />
       </FormLayout>
     </Page>
   );

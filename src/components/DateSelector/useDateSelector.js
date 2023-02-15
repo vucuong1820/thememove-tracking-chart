@@ -19,6 +19,7 @@ export default function useDateSelector({ onConfirm, selectedDate, onlyCompare, 
   const [compare, setCompare] = useState(onlyCompare || !onlyDefault || false);
   const [dateOptions, setDateOptions] = useState(DATE_OPTIONS);
   const comparedRef = useRef();
+  const initRef = useRef();
 
   useEffect(() => {
     if (!compare) onChangeComparedDate(null);
@@ -28,11 +29,21 @@ export default function useDateSelector({ onConfirm, selectedDate, onlyCompare, 
   }, [compare]);
 
   useEffect(() => {
+    if (initRef.current) {
+      setDateOptions(() => [...DATE_OPTIONS, { label: 'Custom', value: 'custom' }]);
+      setDateSelectedOption('custom');
+    }
+
+    initRef.current = true;
+  }, [selectedDate]);
+
+  useEffect(() => {
     setCompare(onlyCompare || !onlyDefault || false);
   }, [onlyCompare, onlyDefault]);
 
   const handleChangeSelect = (newOpt) => {
     setDateOptions((prev) => prev.filter((opt) => opt.value !== 'custom'));
+    initRef.current = false;
     setDateSelectedOption(newOpt);
     onChangeSelectedDate(getDateRange(newOpt));
   };
