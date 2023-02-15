@@ -43,15 +43,15 @@ const Container = styled.div`
   }
 `;
 const navList = [
-  {
-    items: [
-      {
-        label: 'Dashboard',
-        icon: HomeMajor,
-        url: '/',
-      },
-    ],
-  },
+  // {
+  //   items: [
+  //     {
+  //       label: 'Dashboard',
+  //       icon: HomeMajor,
+  //       url: '/',
+  //     },
+  //   ],
+  // },
   {
     separator: true,
     title: 'Page tabs',
@@ -59,7 +59,7 @@ const navList = [
       {
         label: 'Overview',
         icon: SearchMajor,
-        url: '/overview',
+        url: '/',
       },
       {
         label: 'Top 5',
