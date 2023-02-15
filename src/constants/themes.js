@@ -59,6 +59,7 @@ const themeMoveThemes = [
     name: 'MaxCoach',
     fixedSales: 2838,
     fixedReviews: 95,
+    color: '#2F4538',
     category: ['Education'],
   },
   {
